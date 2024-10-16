@@ -104,7 +104,7 @@ def view_pdf():
     pdf_sentences = extract_sentences_from_pdf(pdf_content.getvalue())
     # Find the most similar sentence to the chatbot response
     most_similar_sentence, similarity_score = find_most_similar_sentence(chatbot_response, pdf_sentences)
-
+    print(most_similar_sentence)
     if similarity_score < 0.1:
         return "No highly similar sentence found.", 400
 
@@ -113,24 +113,16 @@ def view_pdf():
         pdf_fitz = fitz.open(stream=pdf_content.getvalue(), filetype="pdf")
 
         # Process specified pages to highlight the found sentence
-        for page_num in pages:
-            if page_num <= len(pdf_fitz):  # Ensure page number is valid (use <= for 1-based indexing)
-                pdf_page = pdf_fitz[page_num - 1]  # Get the specific page
-
-                # Attempt to highlight the text on the current page
-                rects = pdf_page.search_for(most_similar_sentence)  # Search for the text on the current page
-
-                if rects:  # If rectangles are found, highlight them
-                    highlight_text_in_page(pdf_page, most_similar_sentence)
-                else:
-                    # If no rectangles were found, search all pages for the text
-                    for p in range(len(pdf_fitz)):  # Iterate through all pages
-                        all_page = pdf_fitz[p]
-                        rects = all_page.search_for(most_similar_sentence)
-
-                        if rects:  # If found on any page
-                            highlight_text_in_page(all_page, most_similar_sentence)  # Highlight text
-                            break  # Exit the loop after highlighting the first found instance
+        for page_num in range(len(pdf_fitz)):  # Ensure page number is valid (use <= for 1-based indexing)
+            pdf_page = pdf_fitz[page_num]  # Get the specific page
+            print(len(pdf_fitz))
+            print('page_num', page_num)
+            # Attempt to highlight the text on the current page
+            rects = pdf_page.search_for(most_similar_sentence)  # Search for the text on the current page
+            print('rects',rects)
+            if rects:  # If rectangles are found, highlight them
+                highlight_text_in_page(pdf_page, most_similar_sentence)
+                break  # Exit the loop after highlighting the first found instance
 
 
         # Save the modified PDF document
