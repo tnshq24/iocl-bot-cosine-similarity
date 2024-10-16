@@ -19,7 +19,7 @@ async function callChatbotAPI(message) {
         "messages": [
             {
                 "role": "system",
-                "content": "All responses must be formatted as follows: The response should provide clear and concise information relevant to the query. Include the document name in the format hrhbtb-page-X.pdf, where X is the corresponding page number. Always include the following reference link at the end of each response: https://ioclhrchatgpt.blob.core.windows.net/documents/hrhbtb.pdf"
+                "content": "All responses must be formatted as follows: The response should provide clear and concise information relevant to the query. Always include the following reference link at the end of each response: https://ioclhrchatgpt.blob.core.windows.net/documents/hrhbtb.pdf"
             },
             {
                 "role": "user",
@@ -27,8 +27,8 @@ async function callChatbotAPI(message) {
             }
         ],
         "max_tokens": 800,
-        "temperature": 0.3,
-        "top_p": 0.3,
+        "temperature": 0.7,
+        "top_p": 0.95,
         "frequency_penalty": 0,
         "presence_penalty": 0,
         "data_sources": [
@@ -41,7 +41,7 @@ async function callChatbotAPI(message) {
                     "query_type": "vector_simple_hybrid",
                     "fields_mapping": {},
                     "in_scope": true,
-                    "role_information": "All responses must be formatted as follows: The response should provide clear and concise information relevant to the query. Include the document name in the format hrhbtb-page-X.pdf, where X is the corresponding page number. Always include the following reference link at the end of each response: https://ioclhrchatgpt.blob.core.windows.net/documents/hrhbtb.pdf",
+                    "role_information": "All responses must be formatted as follows: The response should provide clear and concise information relevant to the query. Always include the following reference link at the end of each response: https://ioclhrchatgpt.blob.core.windows.net/documents/hrhbtb.pdf",
                     "filter": null,
                     "strictness": 4,
                     "top_n_documents": 3,
